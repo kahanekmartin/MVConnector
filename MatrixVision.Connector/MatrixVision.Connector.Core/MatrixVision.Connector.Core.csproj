@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="mv.impact.acquire">
+      <HintPath>..\..\..\..\..\..\Program Files\MATRIX VISION\mvIMPACT Acquire\bin\netstandard2.0\mv.impact.acquire.dll</HintPath>
+    </Reference>
+    <Reference Include="mv.impact.acquire.display">
+      <HintPath>..\..\..\..\..\..\Program Files\MATRIX VISION\mvIMPACT Acquire\bin\netstandard2.0\mv.impact.acquire.display.dll</HintPath>
+    </Reference>
+    <Reference Include="mv.impact.acquire.display.extensions">
+      <HintPath>..\..\..\..\..\..\Program Files\MATRIX VISION\mvIMPACT Acquire\bin\netstandard2.0\mv.impact.acquire.display.extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="mv.impact.acquire.examples.helper">
+      <HintPath>..\..\..\..\..\..\Program Files\MATRIX VISION\mvIMPACT Acquire\bin\netstandard2.0\mv.impact.acquire.examples.helper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
