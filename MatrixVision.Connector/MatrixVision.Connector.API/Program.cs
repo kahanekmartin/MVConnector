@@ -7,7 +7,7 @@ builder.Services.AddScoped<MVConnector>();
 
 var app = builder.Build();
 
-app.MapGet("/test", (HttpContext context, MVConnector connector) =>
+app.MapGet("/test", (MVConnector connector) =>
 {
     connector.Test();
 

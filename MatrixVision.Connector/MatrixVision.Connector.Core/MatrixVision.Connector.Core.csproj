@@ -6,18 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="mv.impact.acquire">
-      <HintPath>..\..\..\..\..\..\Program Files\MATRIX VISION\mvIMPACT Acquire\bin\netstandard2.0\mv.impact.acquire.dll</HintPath>
-    </Reference>
-    <Reference Include="mv.impact.acquire.display">
-      <HintPath>..\..\..\..\..\..\Program Files\MATRIX VISION\mvIMPACT Acquire\bin\netstandard2.0\mv.impact.acquire.display.dll</HintPath>
-    </Reference>
-    <Reference Include="mv.impact.acquire.display.extensions">
-      <HintPath>..\..\..\..\..\..\Program Files\MATRIX VISION\mvIMPACT Acquire\bin\netstandard2.0\mv.impact.acquire.display.extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="mv.impact.acquire.examples.helper">
-      <HintPath>..\..\..\..\..\..\Program Files\MATRIX VISION\mvIMPACT Acquire\bin\netstandard2.0\mv.impact.acquire.examples.helper.dll</HintPath>
-    </Reference>
+    <Reference Include="mv.impact.acquire" />
+    <Reference Include="mv.impact.acquire.display" />
+    <Reference Include="mv.impact.acquire.display.extensions" />
+    <Reference Include="mv.impact.acquire.examples.helper" />
   </ItemGroup>
 
 </Project>
