@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "ef6cb63b-53ba-4286-9b08-62e7e7d259a0",
+		"name": "MVConnector",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12939143"
+	},
+	"item": [
+		{
+			"name": "Connect",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7096/api/cameras/:deviceId/connect",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7096",
+					"path": [
+						"api",
+						"cameras",
+						":deviceId",
+						"connect"
+					],
+					"variable": [
+						{
+							"key": "deviceId",
+							"value": "VD000002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Disconnect",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7096/api/cameras/:deviceId/disconnect",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7096",
+					"path": [
+						"api",
+						"cameras",
+						":deviceId",
+						"disconnect"
+					],
+					"variable": [
+						{
+							"key": "deviceId",
+							"value": "VD000002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7096/api/capture/single/:format/:deviceId",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7096",
+					"path": [
+						"api",
+						"capture",
+						"single",
+						":format",
+						":deviceId"
+					],
+					"variable": [
+						{
+							"key": "format",
+							"value": "png"
+						},
+						{
+							"key": "deviceId",
+							"value": "VD000002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture Image Singular",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7096/api/capture/single/:format/:deviceId/singular",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7096",
+					"path": [
+						"api",
+						"capture",
+						"single",
+						":format",
+						":deviceId",
+						"singular"
+					],
+					"variable": [
+						{
+							"key": "format",
+							"value": "png"
+						},
+						{
+							"key": "deviceId",
+							"value": "VD000002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Capture Image Batch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7096/api/capture/single/:format/:deviceId/singular",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7096",
+					"path": [
+						"api",
+						"capture",
+						"single",
+						":format",
+						":deviceId",
+						"singular"
+					],
+					"variable": [
+						{
+							"key": "format",
+							"value": "png"
+						},
+						{
+							"key": "deviceId",
+							"value": "VD000002"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
