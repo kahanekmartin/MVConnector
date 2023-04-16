@@ -45,6 +45,20 @@ namespace MatrixVision.Connector.API.App
 
                 return Results.BadRequest(Response.Error($"Unable to connect to the selected device. DeviceId: {deviceId}"));
             });
+
+            app.MapGet("/api/capture/stream-batch/{format}/{deviceId}/{numImages}/{fps}", async ([FromRoute] string format, [FromRoute] string deviceId, [FromRoute] int numImages, [FromRoute] int fps) =>
+            {
+                var connector = connectionManager.GetCameraConnection(deviceId);
+
+                if (connector.IsConnected)
+                {
+                    var result = await connector.CaptureBatch(numImages, fps, format);
+
+                    return Results.Ok(result);
+                }
+
+                return Results.BadRequest(Response.Error($"Unable to connect to the selected device. DeviceId: {deviceId}"));
+            });
         }
     }
 }

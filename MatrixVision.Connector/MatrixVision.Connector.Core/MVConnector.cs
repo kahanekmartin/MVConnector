@@ -4,6 +4,8 @@ using System;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MatrixVision.Connector.Core
 {
@@ -32,7 +34,7 @@ namespace MatrixVision.Connector.Core
                 throw new ArgumentException($"Unsupported format requested. Format: {format}");
             }
 
-            return CaptureFrame(imageFormat!);
+            return Response.CapturedSingle(CaptureFrame(imageFormat!));
         }
 
         public void Connect(string serialId, bool virtualDevice = false)
@@ -69,7 +71,55 @@ namespace MatrixVision.Connector.Core
                 throw new InvalidOperationException("Device is not connected.");
             }
 
-            return CaptureFrame(imageFormat!);
+            return Response.CapturedSingle(CaptureFrame(imageFormat!));
+        }
+
+        public async Task<Response> CaptureBatch(int numImages, int fps, string format)
+        {
+            var imageFormat = ParseImageFormat(format);
+
+            if (imageFormat is null)
+            {
+                throw new ArgumentException($"Unsupported format requested. Format: {format}");
+            }
+
+            if (device is null || functionInterface is null)
+            {
+                throw new InvalidOperationException("Device is not connected.");
+            }
+
+            var response = new Response { Success = true };
+
+            int imagesCaptured = 0;
+
+            var captureInterval = (int)(1000 / fps);
+            var cancellationTokenSource = new CancellationTokenSource();
+            var token = cancellationTokenSource.Token;
+
+            SystemSettings systemSettings = new(device);
+
+            systemSettings.requestCount.write(numImages);
+
+            while (imagesCaptured < numImages)
+            {
+                Asset frame = CaptureFrame(imageFormat);
+                response.AddFrame(frame);
+                imagesCaptured++;
+
+                if (imagesCaptured < numImages)
+                {
+                    await Task.Delay(captureInterval);
+                }
+            }
+
+            if (response.Images.Count != numImages)
+            {
+                response.Success = false;
+            }
+
+            functionInterface.imageRequestReset(0, 0);
+
+            return response;
         }
 
         private void ConfigureDevice(string serialId, bool virtualDevice)
@@ -98,7 +148,7 @@ namespace MatrixVision.Connector.Core
             {
                 var virtualDeviceSettings = new CameraSettingsVirtualDevice(device);
 
-                var path = ConfigurationAccessor.FolderPath;
+                var path = Path.GetFullPath(ConfigurationAccessor.FolderPath);
 
                 virtualDeviceSettings.testMode.write(TVirtualDeviceTestMode.vdtmImageDirectory);
                 virtualDeviceSettings.imageDirectory.write(path);
@@ -108,7 +158,7 @@ namespace MatrixVision.Connector.Core
             }
         }
 
-        private Response CaptureFrame(ImageFormat imageFormat)
+        private Asset CaptureFrame(ImageFormat imageFormat)
         {
             TDMR_ERROR result = (TDMR_ERROR)functionInterface!.imageRequestSingle();
 
@@ -125,7 +175,7 @@ namespace MatrixVision.Connector.Core
             {
                 var request = functionInterface.getRequest(requestNr);
 
-                Response response;
+                Asset response;
 
                 if (request.isOK)
                 {
@@ -140,11 +190,11 @@ namespace MatrixVision.Connector.Core
                         Image = Convert.ToBase64String(ms.GetBuffer())
                     };
 
-                    response = Response.CapturedSingle(image);
+                    response = image;
                 }
                 else
                 {
-                    response = Response.Error($"Error: {request.requestResult.readS()}");
+                    throw new InvalidOperationException($"Error: {request.requestResult.readS()}");
                 }
 
                 request!.unlock();
@@ -152,7 +202,7 @@ namespace MatrixVision.Connector.Core
             }
             else
             {
-                return Response.Error("Request timeout");
+                throw new InvalidOperationException("Request timeout");
             }
         }
 

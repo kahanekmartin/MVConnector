@@ -19,5 +19,8 @@ namespace MatrixVision.Connector.Core
             Success = true,
             Images = new List<Asset> { image }
         };
+
+        public void AddFrame(Asset asset) => Images.Add(asset);
+
     }
 }
