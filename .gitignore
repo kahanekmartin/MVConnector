@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/MatrixVision.Connector/MatrixVision.Connector.Core/_Test

@@ -1,17 +1,11 @@
-using MatrixVision.Connector.Core;
+using MatrixVision.Connector.API.App;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure services
-builder.Services.AddScoped<MVConnector>();
-
 var app = builder.Build();
 
-app.MapGet("/test", (MVConnector connector) =>
-{
-    connector.Test();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-    return Results.Ok();
-});
+app.MapCameraEndpoints();
 
 app.Run();
