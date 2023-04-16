@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatrixVision.Connector.API"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatrixVision.Connector.Core", "MatrixVision.Connector.Core\MatrixVision.Connector.Core.csproj", "{55E1D536-6474-4CD8-8746-CBB93E1C23E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixVision.Connector.Benchmark", "MatrixVision.Connector.Benchmark\MatrixVision.Connector.Benchmark.csproj", "{3E10DD92-D846-4485-837C-9D85A50F162E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{55E1D536-6474-4CD8-8746-CBB93E1C23E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55E1D536-6474-4CD8-8746-CBB93E1C23E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55E1D536-6474-4CD8-8746-CBB93E1C23E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E10DD92-D846-4485-837C-9D85A50F162E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E10DD92-D846-4485-837C-9D85A50F162E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E10DD92-D846-4485-837C-9D85A50F162E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E10DD92-D846-4485-837C-9D85A50F162E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

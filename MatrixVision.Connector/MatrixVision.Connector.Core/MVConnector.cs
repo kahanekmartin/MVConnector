@@ -79,7 +79,6 @@ namespace MatrixVision.Connector.Core
                 throw new InvalidOperationException($"Device is already set up. SerialId: {serialId}");
             }
 
-            // Find the device with the given serial ID
             device = DeviceManager.getDeviceBySerial(serialId);
 
             if (device.isInUse)
