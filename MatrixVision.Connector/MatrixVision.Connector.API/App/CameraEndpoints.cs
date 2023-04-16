@@ -27,12 +27,12 @@ namespace MatrixVision.Connector.API.App
             {
                 using var connector = new MVConnector();
 
-                var result = connector.CaptureSingle(deviceId, format, true);
+                var result = connector.CaptureSingle(deviceId, format, ConfigurationAccessor.VirtualDeviceEnabled);
 
                 return Results.Ok(result);
             });
 
-            app.MapGet("/api/capture/single/{format}/{deviceid}", ([FromRoute] string format, [FromRoute] string deviceId) =>
+            app.MapGet("/api/capture/single/{format}/{deviceId}", ([FromRoute] string format, [FromRoute] string deviceId) =>
             {
                 var connector = connectionManager.GetCameraConnection(deviceId);
 

@@ -97,11 +97,9 @@ namespace MatrixVision.Connector.Core
 
             if (virtualDevice)
             {
-                //C:\Users\martin.kahanek\Source\Repos\kahanekmartin\MVConnector\MatrixVision.Connector\MatrixVision.Connector.Core\mv\_Test\
-
                 var virtualDeviceSettings = new CameraSettingsVirtualDevice(device);
 
-                var path = @"C:\Users\martin.kahanek\Source\Repos\kahanekmartin\MVConnector\MatrixVision.Connector\MatrixVision.Connector.Core\_Test\";
+                var path = ConfigurationAccessor.FolderPath;
 
                 virtualDeviceSettings.testMode.write(TVirtualDeviceTestMode.vdtmImageDirectory);
                 virtualDeviceSettings.imageDirectory.write(path);
@@ -117,7 +115,7 @@ namespace MatrixVision.Connector.Core
 
             if (result != TDMR_ERROR.DMR_NO_ERROR)
             {
-                return Response.Error($"'FunctionInterface.imageRequestSingle' returned with an unexpected result: {result} (Error code: {ImpactAcquireException.getErrorCodeAsString(result)})");
+                throw new InvalidOperationException($"'FunctionInterface.imageRequestSingle' returned with an unexpected result: {result} (Error code: {ImpactAcquireException.getErrorCodeAsString(result)})");
             }
 
             DeviceAccess.manuallyStartAcquisitionIfNeeded(device, functionInterface);

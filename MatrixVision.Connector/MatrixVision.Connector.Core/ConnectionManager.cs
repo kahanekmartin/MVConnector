@@ -5,26 +5,26 @@ namespace MatrixVision.Connector.Core
 {
     public class ConnectionManager
     {
-        private ConcurrentDictionary<string, MVConnector> _connectedCameras;
+        private readonly ConcurrentDictionary<string, MVConnector> connectedCameras;
 
         public ConnectionManager()
         {
-            _connectedCameras = new ConcurrentDictionary<string, MVConnector>();
+            connectedCameras = new ConcurrentDictionary<string, MVConnector>();
         }
 
         public string ConnectCamera(string serialId)
         {
             var cameraConnector = new MVConnector();
-            cameraConnector.Connect(serialId, true);
+            cameraConnector.Connect(serialId, ConfigurationAccessor.VirtualDeviceEnabled);
 
-            _connectedCameras.TryAdd(serialId, cameraConnector);
+            connectedCameras.TryAdd(serialId, cameraConnector);
 
             return serialId;
         }
 
         public void DisconnectCamera(string serialId)
         {
-            if (_connectedCameras.TryRemove(serialId, out MVConnector cameraConnector))
+            if (connectedCameras.TryRemove(serialId, out MVConnector cameraConnector))
             {
                 cameraConnector.Disconnect();
             }
@@ -36,7 +36,7 @@ namespace MatrixVision.Connector.Core
 
         public MVConnector GetCameraConnection(string serialId)
         {
-            if (_connectedCameras.TryGetValue(serialId, out MVConnector cameraConnector))
+            if (connectedCameras.TryGetValue(serialId, out MVConnector cameraConnector))
             {
                 return cameraConnector;
             }
